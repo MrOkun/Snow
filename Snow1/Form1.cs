@@ -36,7 +36,7 @@ namespace Snow1
 
         Snowflake[] Snowflacks;
 
-        readonly int SnowflakeCount = 160;
+        readonly int SnowflakeCount = 240;
 
         public FormMain()
         {
