@@ -31,14 +31,12 @@ namespace Snow1
         }
 
         Graphics Canvas;
-        Pen _pen;
         Random rnd;
         Bitmap Back;
 
         Snowflake[] Snowflacks;
 
-        int UpdateCount = 0;
-        readonly int SnowflakeCount = 120;
+        readonly int SnowflakeCount = 160;
 
         public FormMain()
         {
@@ -52,7 +50,7 @@ namespace Snow1
             for (int i = 0; i < SnowflakeCount; i++)
             {
                 float addSpeed = 3 + (float)rnd.NextDouble() + (float)rnd.NextDouble() + (float)rnd.NextDouble();
-                Snowflacks[i] = new Snowflake(rnd.Next(0, 580), rnd.Next(0, 580), addSpeed, rnd.Next(8, 12), 1);
+                Snowflacks[i] = new Snowflake(rnd.Next(-100, 550), rnd.Next(0, 580), addSpeed, rnd.Next(4, 12), 1);
             }
         }
 
@@ -86,7 +84,11 @@ namespace Snow1
             for (int i = 0; i < SnowflakeCount; i++)
             {
                 Canvas.FillEllipse(SnowBrush, Snowflacks[i].X, Snowflacks[i].Y, Snowflacks[i].Size, Snowflacks[i].Size);
-                
+
+                Snowflacks[i].Time += 0.4f;
+                Snowflacks[i].X += (float)Math.Sin(Snowflacks[i].Time) * 5;
+
+
                 if (Snowflacks[i].Y > 600)
                 {
                     Snowflacks[i].Y = 0;
