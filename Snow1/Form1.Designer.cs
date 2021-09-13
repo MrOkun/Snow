@@ -62,7 +62,6 @@ namespace Snow1
             this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.MinimizeBox = false;
             this.Name = "FormMain";
             this.Text = "Okun\'s Snow FPS : xxx";
             ((System.ComponentModel.ISupportInitialize)(this.Canvas_Box)).EndInit();
