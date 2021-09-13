@@ -64,7 +64,7 @@ namespace Snow1
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FormMain";
-            this.Text = "Okun\'s Snow";
+            this.Text = "Okun\'s Snow FPS : xxx";
             ((System.ComponentModel.ISupportInitialize)(this.Canvas_Box)).EndInit();
             this.ResumeLayout(false);
 

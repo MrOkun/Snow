@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -36,7 +37,10 @@ namespace Snow1
 
         Snowflake[] Snowflacks;
 
-        readonly int SnowflakeCount = 240;
+        DateTime _lastCheckTime = DateTime.Now;
+        long _frameCount = 0;
+
+        readonly int SnowflakeCount = 440; //440
 
         public FormMain()
         {
@@ -86,12 +90,12 @@ namespace Snow1
                 Canvas.FillEllipse(SnowBrush, Snowflacks[i].X, Snowflacks[i].Y, Snowflacks[i].Size, Snowflacks[i].Size);
 
                 Snowflacks[i].Time += 0.4f;
-                Snowflacks[i].X += (float)Math.Sin(Snowflacks[i].Time) * 5;
+                Snowflacks[i].X += (float)Math.Sin(Snowflacks[i].Time) * 6;
 
 
                 if (Snowflacks[i].Y > 600)
                 {
-                    Snowflacks[i].Y = 0;
+                    Snowflacks[i].Y = -15;
                     Snowflacks[i].Time = 0;
                 }
                 if (Snowflacks[i].X > 580 & Snowflacks[i].X < -5)
@@ -106,10 +110,22 @@ namespace Snow1
 
         }
 
+        double GetFps()
+        {
+            double secondsElapsed = (DateTime.Now - _lastCheckTime).TotalSeconds;
+            long count = Interlocked.Exchange(ref _frameCount, 0);
+            double fps = count / secondsElapsed;
+            _lastCheckTime = DateTime.Now;
+            return fps;
+        }
+
         private void TimerUpdate_Tick(object sender, EventArgs e)
         {
             //this.InvokePaint(Canvas_Box, new PaintEventArgs(Canvas, new Rectangle(0, 0, Form.ActiveForm.Width, Form.ActiveForm.Height)));
             Canvas_Box.Invalidate();
+            Interlocked.Increment(ref _frameCount);
+
+            this.Text = "Okun's Snow | FPS : " + GetFps();
         }
     }
 }
