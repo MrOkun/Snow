@@ -40,7 +40,9 @@ namespace Snow1
         DateTime _lastCheckTime = DateTime.Now;
         long _frameCount = 0;
 
-        readonly int SnowflakeCount = 440; //440
+        string _path = "backB.png";
+
+        readonly int SnowflakeCount = 740; //740
 
         public FormMain()
         {
@@ -62,7 +64,7 @@ namespace Snow1
         {
             rnd = new Random();
 
-            Back = new Bitmap("backB.png", true);
+            Back = new Bitmap(_path, true);
 
             //Canvas = Canvas_Box.CreateGraphics();
 
@@ -90,8 +92,7 @@ namespace Snow1
                 Canvas.FillEllipse(SnowBrush, Snowflacks[i].X, Snowflacks[i].Y, Snowflacks[i].Size, Snowflacks[i].Size);
 
                 Snowflacks[i].Time += 0.4f;
-                Snowflacks[i].X += (float)Math.Sin(Snowflacks[i].Time) * 6;
-
+                Snowflacks[i].X += (float)Math.Sin(Snowflacks[i].Time) * 3;
 
                 if (Snowflacks[i].Y > 600)
                 {
@@ -104,7 +105,7 @@ namespace Snow1
                 }
                 else
                 {
-                    Snowflacks[i].Y += Snowflacks[i].Speed;
+                    Snowflacks[i].Y += Snowflacks[i].Speed + rnd.Next(-1, 1);
                 }
             }
 
